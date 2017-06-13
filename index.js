@@ -76,13 +76,18 @@ app.post("/users", function(req,res){
 });
 
 app.post("/sessions", function(req,res){
-	//User.findOne, User.findById("id", callback);	
+	//User.findOne, User.findById("id", callback);		
 	User.findOne({email:req.body.email, password:req.body.password}, function(err,user){
-		//el session de express tiende a ocupar mucha memoria en produccion, es dificilmente escalable. Revisar este punto
-		//req.session.user_id = {} se puede mandar un array json de elementos
-		req.session.user_id = user._id;
-		//Se le asigna el user._id al req.session.user_id para luego validarlo en el middleware session.js
-		res.redirect("/app");
+		if(!user){
+			//res.send("Datos Incorrectos");
+			res.redirect("/login");
+		}else{
+			//el session de express tiende a ocupar mucha memoria en produccion, es dificilmente escalable. Revisar este punto
+			//req.session.user_id = {} se puede mandar un array json de elementos
+			req.session.user_id = user._id;
+			//Se le asigna el user._id al req.session.user_id para luego validarlo en el middleware session.js
+			res.redirect("/app");
+		}		
 	});
 });
 
