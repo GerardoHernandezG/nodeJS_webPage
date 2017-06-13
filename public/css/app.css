@@ -1,0 +1,15 @@
+.right-space {
+	margin-right: 1em;
+}
+
+.remove-float{
+	float: none;
+}
+
+.top-space{
+	margin-top: 1.5em;
+}
+
+.big-top-space{
+	margin-top: 200px;
+}

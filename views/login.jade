@@ -1,0 +1,17 @@
+extends ./layout.jade
+block contenido	
+	div(class="col-md-6 remove-float center-block text-center big-top-space")
+		h1 Login
+	div(class="col-md-6 remove-float center-block")
+		form(action="/sessions", method="POST")
+			div(class="form-group")
+				label(for="email") Email:
+				input(type="text",name="email", placeholder="Email", id="email", class="form-control")
+			div
+				label(for="password") Contraseña:
+				input(type="password",name="password", placeholder="Contraseña", id="password", class="form-control")
+			div(class="row top-space")
+				div(class="col-xs-12 col-sm-6")
+					input(type="submit", value="Iniciar Sesión", class="btn btn-info")
+				div(class="col-xs-12 col-sm-6 text-right")
+					a(href="/signup") No tengo cuenta
