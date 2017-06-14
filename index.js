@@ -8,6 +8,7 @@ var User = require("./models/user").User; //no es necesario colocar .js
 var cookieSession = require("cookie-session");  //es mejor para preservar las sesiones aunque reiniciemos el servidor js
 var router_app = require("./routes_app");  //mandamos llamar el modulo de las rutas
 var session_middleware = require("./middlewares/session");
+var methodOverride = require("method-override");  //cargamos el middleware para los metodos del form
 
 
 app.use("/public",express.static('public'));  
@@ -20,6 +21,7 @@ app.use("/public",express.static('public'));
 //Inicializamos las configuraciones de body-parser
 app.use(bodyParser.json()); //nos sirve para peticiones tipo application/json
 app.use(bodyParser.urlencoded({extended: true})); //permite leer los elementos de todo tipo, al establecer extended = true, permitimos tambien arreglos y otros elementos
+app.use(methodOverride("_method"));  //al inicializar el override, el nombre que se le pone es el name del hidden que se manda en los forms
 
 // //middleware para sessions donde estableces un random secret y otras configuraciones
 // app.use(session({

@@ -13,3 +13,45 @@
 .big-top-space{
 	margin-top: 200px;
 }
+
+.white-text{
+	color: white;
+}
+
+.large-padding {
+	padding: 10px 15px;
+}
+
+.black{
+	background-color: #222;
+}
+
+nav{
+	text-align: right;
+}
+
+nav li {
+	display: inline-block; /* para colocar elementos uno al lado del otro */
+	margin-right: 1em;
+	font-size: 1.1em;
+}
+
+nav li a{
+	color: white;
+}
+
+nav li a:hover{
+	color: white;
+}
+
+.white{
+	background-color: white;
+}
+
+.border{
+	border: solid 1px #eee;
+}
+
+.tr:nth-of-type(odd){  /* Toma los elementos impares de los los hijos tr (odd-impar, even-par) */
+	background-color: #eee;
+}

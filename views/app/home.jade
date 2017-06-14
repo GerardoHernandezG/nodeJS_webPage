@@ -1,4 +1,5 @@
 extends ../layout.jade
 block contenido
-	h1 Hola #{user.email}
+	h1 Bienvenido: #{user.username}
+	//#{variable o array.elemento} interpolar objetos con javascript, mostrarlos en pantalla
 	a(href="/app/imagenes/new") Subir Imagen

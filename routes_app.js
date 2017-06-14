@@ -18,7 +18,9 @@ router.get("/imagenes/new",function(req,res){
 });
 
 router.get("/imagenes/:id/edit", function(req,res){
-
+	Imagen.findById(req.params.id, function(err,imagen){
+		res.render("app/imagenes/edit", {imagen: imagen});		
+	});
 });
 
 //para imagen individual
@@ -32,7 +34,16 @@ router.route("/imagenes/:id")
 		});		
 	})
 	.put(function(req,res){
-
+		Imagen.findById(req.params.id, function(err,imagen){
+			imagen.title = req.body.title;
+			imagen.save(function(err){
+				if(!err){
+					res.render("app/imagenes/show", {imagen: imagen});
+				}else{
+					res.render("app/imagenes/"+imagen.id+"/edit", {imagen: imagen});
+				}
+			});			
+		});	
 	})
 	.delete(function(req,res){
 
@@ -41,7 +52,12 @@ router.route("/imagenes/:id")
 //para todas las imagenes o conjunto de imagenes
 router.route("/imagenes")
 	.get(function(req,res){
-
+		Imagen.find({},function(err,imagenes){
+			if(err){
+				res.redirect("/app"); return; //con return se evita que se ejecute el resto del codigo, solo hacer el redirect
+			}
+			res.render("app/imagenes/index", {imagenes: imagenes});
+		});
 	})
 	.post(function(req,res){
 		//obtenemos los datos del post
