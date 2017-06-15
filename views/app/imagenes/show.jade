@@ -1,4 +1,9 @@
 extends ../../layout.jade
 //salir dos carpetas
 block contenido
-	h1= imagen.title
+	div(class="img-container")
+		h1= imagen.title
+		img(src="/public/imagenes/#{imagen._id}.#{imagen.extension}", class="main-img")
+		if(typeof imagen.creator != "undefined")
+			p 
+				strong Por: #{imagen.creator.email}

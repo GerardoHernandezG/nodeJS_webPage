@@ -9,6 +9,7 @@ var cookieSession = require("cookie-session");  //es mejor para preservar las se
 var router_app = require("./routes_app");  //mandamos llamar el modulo de las rutas
 var session_middleware = require("./middlewares/session");
 var methodOverride = require("method-override");  //cargamos el middleware para los metodos del form
+var formidable = require("express-formidable"); //middleware parser para subir archivos
 
 
 app.use("/public",express.static('public'));  
@@ -19,8 +20,8 @@ app.use("/public",express.static('public'));
 */
 
 //Inicializamos las configuraciones de body-parser
-app.use(bodyParser.json()); //nos sirve para peticiones tipo application/json
-app.use(bodyParser.urlencoded({extended: true})); //permite leer los elementos de todo tipo, al establecer extended = true, permitimos tambien arreglos y otros elementos
+//app.use(bodyParser.json()); //nos sirve para peticiones tipo application/json
+//app.use(bodyParser.urlencoded({extended: true})); //permite leer los elementos de todo tipo, al establecer extended = true, permitimos tambien arreglos y otros elementos
 app.use(methodOverride("_method"));  //al inicializar el override, el nombre que se le pone es el name del hidden que se manda en los forms
 
 // //middleware para sessions donde estableces un random secret y otras configuraciones
@@ -32,17 +33,18 @@ app.use(methodOverride("_method"));  //al inicializar el override, el nombre que
 
 app.use(cookieSession({
 	name: "session",
-	keys: ["llave-1", "llave-2"]
-	
+	keys: ["llave-1", "llave-2"]	
 }));
 
+//cofniguramos la app, para que use formidable, ya no se necesita body-parser, cambiar req.body por req.fields cuando recibamos parametros por post o put
+app.use(formidable({keepExtensions: true}));
 
 app.set("view engine", "jade");  //jade es un motor de vistas para nodejs
 
 
 /* Seccion de rutas url */
 
-app.get("/", function(req,res){	
+app.get("/", function(req,res){		
 	res.render("index");  //home de la pagina
 });
 
@@ -62,10 +64,10 @@ app.get("/login", function(req,res){
 });
 
 app.post("/users", function(req,res){	
-	var user = new User({email: req.body.email, 
-						 password: req.body.password, 
-						 password_confirmation: req.body.password_confirmation,
-						 username: req.body.username,
+	var user = new User({email: req.fields.email, 
+						 password: req.fields.password, 
+						 password_confirmation: req.fields.password_confirmation,
+						 username: req.fields.username,
 						});
 	//console.log(user.password_confirmation);  //mostrar el atributo virtual, no se refleja en la base de datos
 	//las validaciones hechas en el modelo con mongoose se pueden desplegar en el metodo user.save en el callback
@@ -79,7 +81,7 @@ app.post("/users", function(req,res){
 
 app.post("/sessions", function(req,res){
 	//User.findOne, User.findById("id", callback);		
-	User.findOne({email:req.body.email, password:req.body.password}, function(err,user){
+	User.findOne({email:req.fields.email, password:req.fields.password}, function(err,user){
 		if(!user){
 			//res.send("Datos Incorrectos");
 			res.redirect("/login");

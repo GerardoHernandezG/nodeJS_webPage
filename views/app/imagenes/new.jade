@@ -4,13 +4,14 @@ block contenido
 	div(class="col-md-6 remove-float center-block text-center big-top-space")
 		h1 Subir Imagen
 	div(class="col-md-6 remove-float center-block")
-		form(action="/app/imagenes", method="POST")
+		//el enctype es necesario para el envio de archivos
+		form(action="/app/imagenes" method="POST" enctype="multipart/form-data")
 			div(class="form-group")
 				label(for="title") Título:
 				input(type="text",name="title", placeholder="Título de la imagen", id="title", class="form-control")
 			div
 				label(for="archivo") Imagen:
-				input(type="file",name="archivo", id="archivo", class="form-control")
+				input(type="file",name="archivo", id="archivo")
 			div(class="row top-space")
 				div(class="col-xs-12 col-sm-6")
-					input(type="submit", value="Guardar", class="btn btn-info")		
+					input(type="submit", value="Guardar", class="btn btn-info")

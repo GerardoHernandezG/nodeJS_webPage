@@ -2,7 +2,9 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var img_schema = new Schema({
-	title: {type:String, required: true}
+	title: {type:String, required: true},
+	creator: {type:Schema.Types.ObjectId, ref: "User"}, //references a foreign key, relation 1-many
+	extension: {type:String, required:true}
 });
 
 var Imagen = mongoose.model("Imagen", img_schema);

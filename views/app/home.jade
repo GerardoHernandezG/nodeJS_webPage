@@ -1,5 +1,11 @@
 extends ../layout.jade
 block contenido
 	h1 Bienvenido: #{user.username}
-	//#{variable o array.elemento} interpolar objetos con javascript, mostrarlos en pantalla
-	a(href="/app/imagenes/new") Subir Imagen
+	//#{variable o array.elemento} interpolar objetos con javascript, mostrarlos en pantalla	
+	for imagen in imagenes
+		div(class="img-container")
+			h2= imagen.title
+			img(src="/public/imagenes/#{imagen._id}.#{imagen.extension}", class="main-img")
+			if(typeof imagen.creator != "undefined")
+				p 
+					strong Por: #{imagen.creator.email}

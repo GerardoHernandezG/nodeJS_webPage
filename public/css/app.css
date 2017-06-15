@@ -55,3 +55,34 @@ nav li a:hover{
 .tr:nth-of-type(odd){  /* Toma los elementos impares de los los hijos tr (odd-impar, even-par) */
 	background-color: #eee;
 }
+
+form.link{
+	display: inline-block;
+}
+
+form.link input[type="submit"]{
+	background-color: transparent;
+	border: none;
+	color: rgba(200,50,50);
+}
+
+.img-container{
+	width: 700px;
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.img-container h1, .img-container h2{
+	padding: 15px;
+	border-bottom: 10px solid #222;
+}
+
+.img-container p{
+	text-align: right;
+	font-size: 1.2em
+	margin-top: 1em;
+}
+
+img{
+	max-width: 100%;
+}
