@@ -1,17 +1,21 @@
 doctype html
 html(lang="es")
 	head
-		title Proyecto NodeJs
+		title Repo de Imágenes
 		meta(charset="utf-8")
 		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",rel="stylesheet")
 		link(href="/public/css/app.css",rel="stylesheet")
 	body
 		nav(class="large-padding black white-text")
 			ul
+				li(class="col-md-5 col-sm-5 col-xs-5 left") Developed in NodeJs
 				li
 					a(href="/app") Inicio
 				li
 					a(href="/app/imagenes") Mis Imágenes
 				li 
 					a(href="/app/imagenes/new") Subir Imagen
+				li
+					if(user)
+						a(href="/logout") Cerrar Sesión			
 		block contenido

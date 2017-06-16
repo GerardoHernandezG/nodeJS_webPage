@@ -1,7 +1,7 @@
 extends ../../layout.jade
 block contenido	
 	div(class="col-md-6 remove-float center-block text-center big-top-space")
-		h1 Editar Imagen
+		h1 Editar Título
 	div(class="col-md-6 remove-float center-block")
 		form(action="/app/imagenes/#{imagen.id}?_method=PUT", method="POST")
 			//por default no se puede mandar PUT O DELETE EN EL FORM, entonces se instala un complemento llamado: method-override

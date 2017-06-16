@@ -38,11 +38,8 @@ router.get("/imagenes/:id/edit", function(req,res){
 router.route("/imagenes/:id")
 	.get(function(req,res){  //obtener un elemento
 		//despues del submit del post entramos en esta peticion
-		//buscamos en el modelo la imagen guardada, pero con el metodo de router.all, se quita el finder para no repetir codigo
-		//Imagen.findById(req.params.id, function(err,imagen){
-			//res.render("app/imagenes/show", {imagen: imagen});
-			//en el callback podemos hacer el render de la imagen, y pasamos como parametro la imagen que ya con el find_image.js no se necesita
-		//});
+		//buscamos en el modelo la imagen guardada, pero con el metodo de router.all, se quita el finder para no repetir codigo	
+	    //en el callback podemos hacer el render de la imagen, y pasamos como parametro la imagen que ya con el find_image.js no se necesita	
 		res.render("app/imagenes/show");		
 	})
 	.put(function(req,res){ //actualizar elemento		
@@ -50,8 +47,7 @@ router.route("/imagenes/:id")
 		res.locals.imagen.save(function(err){
 			if(!err){
 				res.render("app/imagenes/show");
-			}else{
-				//res.render("app/imagenes/"+imagen.id+"/edit");
+			}else{				
 				res.render("app/imagenes/"+req.params.id+"/edit");
 			}
 		});			
@@ -81,7 +77,7 @@ router.route("/imagenes")
 		Imagen.find({creator: res.locals.user._id},function(err,imagenes){ 
 			//en la condición del finder ponemos que sólo muestre al usuario las imágenes que éste creó
 			if(err){
-				res.redirect("/app"); return; //con return se evita que se ejecute el resto del codigo, solo hacer el redirect
+				res.redirect("/app"); return; //return para no ejecutar lo demas
 			}
 			res.render("app/imagenes/index", {imagenes: imagenes});
 		});
@@ -112,4 +108,4 @@ router.route("/imagenes")
 		});
 	});
 	
-module.exports = router; //exportamos el objeto renutas
+module.exports = router; //exportamos el objeto router

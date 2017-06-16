@@ -6,12 +6,18 @@
 	float: none;
 }
 
+.left{
+	margin-left: 0px;
+	padding-left: 0px;
+	text-align: left;
+}
+
 .top-space{
 	margin-top: 1.5em;
 }
 
 .big-top-space{
-	margin-top: 200px;
+	margin-top: 100px;
 }
 
 .white-text{
@@ -33,11 +39,15 @@ nav{
 nav li {
 	display: inline-block; /* para colocar elementos uno al lado del otro */
 	margin-right: 1em;
-	font-size: 1.1em;
+	font-size: 1.2em;
 }
 
 nav li a{
 	color: white;
+}
+
+.big-text{
+	font-size: 2em;
 }
 
 nav li a:hover{
